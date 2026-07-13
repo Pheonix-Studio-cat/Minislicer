@@ -38,7 +38,13 @@ cd engine/wasm
 
 ## Status
 
-Phase 0: Grundgerüst — App-Shell mit 3D-Viewer, STL-Upload und WASM-Spike (Mesh-Analyse in C++).
+- **UI im Bambu-Studio-Stil**: Tabs Vorbereiten/Vorschau/Gerät, Panels für Drucker/Filament/Prozess
+- **Import**: STL, OBJ und 3MF
+- **Drucker**: 202 Modelle von 12 Herstellern aus den originalen BambuStudio-Profilen (inkl. H2C/H2D/X2D/P2S)
+- **Slicing**: Kontur-Slicer in C++ (WASM) mit G-Code-Export und Schicht-Vorschau
+  — bewusst vereinfacht (nur Aussenwände); der volle libslic3r-Kern folgt in Phase 1
+- **Senden**: G-Code-Upload an OctoPrint und Klipper/Moonraker
+- **Sprachen**: alle 18 Sprachen aus BambuStudio
 
 ## Lizenz
 
