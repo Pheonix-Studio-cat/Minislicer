@@ -14,9 +14,11 @@
 #include <string>
 #include <vector>
 
+#include "slicer.h"
+
 namespace {
 
-constexpr const char* kVersion = "0.1.0-spike";
+constexpr const char* kVersion = "0.2.0";
 
 // positions: flaches Float32Array [x,y,z, x,y,z, ...], drei Vertices je Dreieck, in mm.
 std::string analyzeMesh(emscripten::val positions) {
@@ -67,9 +69,25 @@ std::string analyzeMesh(emscripten::val positions) {
 
 std::string version() { return kVersion; }
 
+// Sliced die Dreiecks-Suppe und liefert G-Code (siehe slicer.h).
+std::string sliceMesh(emscripten::val positions, double layerHeight,
+                      double lineWidth, double speed, double nozzleTemp,
+                      double bedTemp) {
+    const std::vector<float> verts =
+        emscripten::convertJSArrayToNumberVector<float>(positions);
+    minislicer::SliceParams p;
+    p.layer_height = layerHeight;
+    p.line_width = lineWidth;
+    p.speed = speed;
+    p.nozzle_temp = nozzleTemp;
+    p.bed_temp = bedTemp;
+    return minislicer::sliceToGcode(verts, p);
+}
+
 }  // namespace
 
 EMSCRIPTEN_BINDINGS(minislicer_engine) {
     emscripten::function("analyzeMesh", &analyzeMesh);
+    emscripten::function("sliceMesh", &sliceMesh);
     emscripten::function("version", &version);
 }

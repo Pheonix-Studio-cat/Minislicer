@@ -19,7 +19,30 @@ export interface MeshStats {
 
 interface EngineModule {
   analyzeMesh(positions: Float32Array): string;
+  sliceMesh(
+    positions: Float32Array,
+    layerHeight: number,
+    lineWidth: number,
+    speed: number,
+    nozzleTemp: number,
+    bedTemp: number
+  ): string;
   version(): string;
+}
+
+export interface SliceSettings {
+  layerHeight: number;
+  lineWidth: number;
+  speed: number;
+  nozzleTemp: number;
+  bedTemp: number;
+}
+
+export interface SliceResult {
+  gcode: string;
+  layers: number;
+  timeSec: number;
+  filamentMm: number;
 }
 
 let enginePromise: Promise<EngineModule | null> | null = null;
@@ -42,6 +65,31 @@ async function loadEngine(): Promise<EngineModule | null> {
 export async function engineVersion(): Promise<string | null> {
   const engine = await loadEngine();
   return engine ? engine.version() : null;
+}
+
+/** Sliced das Modell in der WASM-Engine und liefert G-Code + Kennzahlen. */
+export async function sliceModel(
+  positions: Float32Array,
+  s: SliceSettings
+): Promise<SliceResult> {
+  const engine = await loadEngine();
+  if (!engine) throw new Error("WASM-Engine nicht verfügbar");
+  const gcode = engine.sliceMesh(
+    positions,
+    s.layerHeight,
+    s.lineWidth,
+    s.speed,
+    s.nozzleTemp,
+    s.bedTemp
+  );
+  const num = (key: string) =>
+    parseFloat(gcode.match(new RegExp(`; ${key} = ([\\d.]+)`))?.[1] ?? "0");
+  return {
+    gcode,
+    layers: num("minislicer_layers"),
+    timeSec: num("minislicer_time_s"),
+    filamentMm: num("minislicer_filament_mm"),
+  };
 }
 
 /** positions: flaches Array aus Dreiecks-Eckpunkten (x,y,z je Vertex), in mm. */
