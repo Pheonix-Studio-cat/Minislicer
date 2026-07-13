@@ -42,5 +42,6 @@
   "send_fail": "Upload fehlgeschlagen",
   "no_gcode": "Zuerst die Platte slicen.",
   "bambu_note": "Bambu-Lab-Drucker (LAN-Modus) brauchen eine lokale Bridge — geplant für die Geräte-Phase. OctoPrint und Klipper/Moonraker funktionieren direkt.",
-  "language": "Sprache"
+  "language": "Sprache",
+  "engine_fallback": "JS-Fallback (Engine nicht gebaut)"
 }

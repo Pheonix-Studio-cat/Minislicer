@@ -4,13 +4,19 @@
   box-sizing: border-box;
 }
 
+/* Farbwelt an Bambu Studio angelehnt: dunkle Titelleiste, helle Panels,
+   Bambu-Grün als Akzent */
 :root {
-  --bg: #0f1115;
-  --panel: #171a21;
-  --border: #262b36;
-  --text: #e6e9ef;
-  --muted: #8b93a3;
-  --accent: #35c56f;
+  --topbar: #262a30;
+  --topbar-text: #c9ced6;
+  --panel: #ffffff;
+  --panel-2: #f4f5f7;
+  --border: #dfe2e7;
+  --text: #30343b;
+  --muted: #7d8590;
+  --accent: #00ae42;
+  --accent-dark: #009539;
+  --warn: #d9822b;
 }
 
 html,
@@ -20,10 +26,11 @@ body,
 }
 
 body {
-  background: var(--bg);
+  background: var(--panel-2);
   color: var(--text);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   overflow: hidden;
+  font-size: 14px;
 }
 
 .app {
@@ -32,38 +39,219 @@ body {
   height: 100%;
 }
 
+/* ─── Titelleiste ─── */
 .topbar {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 16px;
-  background: var(--panel);
-  border-bottom: 1px solid var(--border);
+  gap: 10px;
+  padding: 0 12px;
+  height: 46px;
+  background: var(--topbar);
+  color: var(--topbar-text);
 }
 
-.topbar h1 {
-  font-size: 1.05rem;
-  font-weight: 600;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: #fff;
+  font-size: 15px;
 }
 
-.topbar .tag {
-  font-size: 0.7rem;
+.brand .logo {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  background: var(--accent);
+  display: inline-block;
+}
+
+.tabs {
+  display: flex;
+  gap: 2px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.tab {
+  border: none;
+  background: transparent;
+  color: var(--topbar-text);
+  padding: 0 18px;
+  font-size: 13.5px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  height: 100%;
+}
+
+.tab.active {
+  color: #fff;
+  border-bottom-color: var(--accent);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.topbar select.lang {
+  background: transparent;
+  color: var(--topbar-text);
+  border: 1px solid #3a3f47;
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 12.5px;
+  max-width: 130px;
+}
+
+.topbar .engine-tag {
+  font-size: 11px;
   color: var(--muted);
-  border: 1px solid var(--border);
+  border: 1px solid #3a3f47;
   border-radius: 999px;
   padding: 2px 8px;
+  white-space: nowrap;
 }
 
-.topbar .spacer {
-  flex: 1;
-}
-
+/* ─── Hauptbereich ─── */
 .main {
   display: grid;
-  grid-template-columns: 1fr 300px;
+  grid-template-columns: 320px 1fr;
   min-height: 0;
 }
 
+.sidebar {
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-bottom: -4px;
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.row .label {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.row input[type="number"],
+.row select {
+  width: 130px;
+}
+
+select,
+input[type="number"],
+input[type="text"],
+input[type="password"] {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 13px;
+  width: 100%;
+}
+
+select:focus,
+input:focus {
+  outline: 2px solid rgba(0, 174, 66, 0.35);
+}
+
+.badge {
+  font-size: 12px;
+  color: var(--accent-dark);
+}
+
+.warn {
+  font-size: 12.5px;
+  color: var(--warn);
+}
+
+.note {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+button.primary {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 9px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.primary:hover {
+  background: var(--accent-dark);
+}
+
+button.primary:disabled {
+  background: #9fb3a7;
+  cursor: not-allowed;
+}
+
+button.secondary,
+label.secondary {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+}
+
+button.secondary:hover,
+label.secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+label.open-btn {
+  background: var(--accent);
+  color: #fff;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+/* ─── Viewport ─── */
 .viewer-wrap {
   position: relative;
   min-width: 0;
@@ -82,91 +270,66 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  color: var(--muted);
+  color: #6b7482;
   pointer-events: none;
   text-align: center;
   padding: 24px;
 }
 
-.sidebar {
-  background: var(--panel);
-  border-left: 1px solid var(--border);
-  padding: 16px;
-  overflow-y: auto;
+.slice-action {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.sidebar h2 {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--muted);
-}
-
-.card {
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
   gap: 8px;
+  align-items: center;
 }
 
-.stat {
+/* Vertikaler Schicht-Slider rechts, wie in Bambu Studio */
+.layer-slider {
+  position: absolute;
+  right: 14px;
+  top: 10%;
+  height: 70%;
   display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
 
-.stat .label {
-  color: var(--muted);
+.layer-slider input[type="range"] {
+  writing-mode: vertical-lr;
+  direction: rtl;
+  height: 100%;
+  accent-color: var(--accent);
 }
 
-.badge {
-  font-size: 0.72rem;
-  color: var(--accent);
+.layer-slider .value {
+  font-size: 12px;
+  background: var(--topbar);
+  color: #fff;
+  border-radius: 5px;
+  padding: 2px 8px;
+  white-space: nowrap;
 }
 
-.warn {
-  font-size: 0.8rem;
-  color: #f2a13c;
+/* ─── Gerät-Tab ─── */
+.device-pane {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 32px 16px;
+  overflow-y: auto;
 }
 
-select {
-  background: var(--bg);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 8px 10px;
-  font-size: 0.85rem;
-  width: 100%;
+.device-card {
+  width: min(460px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-button.primary,
-label.primary {
-  background: var(--accent);
-  color: #08130c;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: center;
-}
-
-button.primary:hover,
-label.primary:hover {
-  filter: brightness(1.08);
-}
-
-input[type="file"] {
-  display: none;
-}
-
-/* Handy/Tablet: Seitenleiste rutscht unter den Viewer */
+/* ─── Handy/Tablet ─── */
 @media (max-width: 760px) {
   .main {
     grid-template-columns: 1fr;
@@ -174,8 +337,25 @@ input[type="file"] {
   }
 
   .sidebar {
-    border-left: none;
+    order: 2;
+    border-right: none;
     border-top: 1px solid var(--border);
-    max-height: 40vh;
+    max-height: 45vh;
+  }
+
+  .viewer-wrap {
+    order: 1;
+  }
+
+  .tabs {
+    gap: 0;
+  }
+
+  .tab {
+    padding: 0 10px;
+  }
+
+  .topbar .engine-tag {
+    display: none;
   }
 }

@@ -42,5 +42,6 @@
   "send_fail": "Ошибка загрузки",
   "no_gcode": "Сначала нарежьте стол.",
   "bambu_note": "Принтерам Bambu Lab (режим LAN) нужен локальный мост — запланировано на фазу устройства. OctoPrint и Klipper/Moonraker работают напрямую.",
-  "language": "Язык"
+  "language": "Язык",
+  "engine_fallback": "Резервный JS (движок не собран)"
 }

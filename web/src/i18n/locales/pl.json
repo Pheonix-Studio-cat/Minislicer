@@ -42,5 +42,6 @@
   "send_fail": "Przesyłanie nie powiodło się",
   "no_gcode": "Najpierw slicuj stół.",
   "bambu_note": "Drukarki Bambu Lab (tryb LAN) wymagają lokalnego mostka — planowane na fazę urządzenia. OctoPrint i Klipper/Moonraker działają bezpośrednio.",
-  "language": "Język"
+  "language": "Język",
+  "engine_fallback": "Awaryjny JS (silnik niezbudowany)"
 }

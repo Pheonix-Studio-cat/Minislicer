@@ -42,5 +42,6 @@
   "send_fail": "A feltöltés nem sikerült",
   "no_gcode": "Először szeletelje a tálcát.",
   "bambu_note": "A Bambu Lab nyomtatókhoz (LAN mód) helyi híd szükséges — az eszközfázisban tervezzük. Az OctoPrint és a Klipper/Moonraker közvetlenül működik.",
-  "language": "Nyelv"
+  "language": "Nyelv",
+  "engine_fallback": "JS tartalék (a motor nincs lefordítva)"
 }

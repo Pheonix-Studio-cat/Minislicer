@@ -42,5 +42,6 @@
   "send_fail": "Yükleme başarısız",
   "no_gcode": "Önce tablayı dilimleyin.",
   "bambu_note": "Bambu Lab yazıcıları (LAN modu) yerel bir köprü gerektirir — cihaz aşaması için planlandı. OctoPrint ve Klipper/Moonraker doğrudan çalışır.",
-  "language": "Dil"
+  "language": "Dil",
+  "engine_fallback": "JS yedeği (motor derlenmedi)"
 }

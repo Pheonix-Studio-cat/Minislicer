@@ -42,5 +42,6 @@
   "send_fail": "Caricamento non riuscito",
   "no_gcode": "Prima esegui lo slicing del piatto.",
   "bambu_note": "Le stampanti Bambu Lab (modalità LAN) richiedono un bridge locale — previsto per la fase dispositivo. OctoPrint e Klipper/Moonraker funzionano direttamente.",
-  "language": "Lingua"
+  "language": "Lingua",
+  "engine_fallback": "Fallback JS (motore non compilato)"
 }

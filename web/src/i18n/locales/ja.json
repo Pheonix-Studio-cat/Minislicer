@@ -42,5 +42,6 @@
   "send_fail": "アップロードに失敗しました",
   "no_gcode": "先にプレートをスライスしてください。",
   "bambu_note": "Bambu Labプリンター（LANモード）にはローカルブリッジが必要です — デバイスフェーズで対応予定。OctoPrintとKlipper/Moonrakerは直接動作します。",
-  "language": "言語"
+  "language": "言語",
+  "engine_fallback": "JSフォールバック（エンジン未ビルド）"
 }

@@ -42,5 +42,6 @@
   "send_fail": "上传失败",
   "no_gcode": "请先切片。",
   "bambu_note": "Bambu Lab 打印机（局域网模式）需要本地桥接 — 计划在设备阶段实现。OctoPrint 和 Klipper/Moonraker 可直接使用。",
-  "language": "语言"
+  "language": "语言",
+  "engine_fallback": "JS 备用（引擎未构建）"
 }
