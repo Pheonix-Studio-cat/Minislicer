@@ -1,0 +1,14 @@
+node_modules/
+dist/
+*.local
+.DS_Store
+
+# Emscripten build output (wird von build.sh nach web/public/engine kopiert)
+engine/wasm/build/
+
+# emsdk-Installation (lokal, nicht einchecken)
+engine/emsdk/
+
+# Heruntergeladene BambuStudio-Profile (per profiles/sync_profiles.sh holen)
+profiles/BambuStudio/
+web/tsconfig.tsbuildinfo

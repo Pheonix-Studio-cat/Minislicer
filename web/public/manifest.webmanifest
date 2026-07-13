@@ -1,0 +1,10 @@
+{
+  "name": "Minislicer",
+  "short_name": "Minislicer",
+  "description": "Web-Slicer auf BambuStudio-Basis – für PC, Tablet und Handy",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f1115",
+  "theme_color": "#0f1115",
+  "icons": []
+}
