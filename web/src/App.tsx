@@ -17,6 +17,7 @@ import {
   savedPrinterName,
 } from "./profiles/printers";
 import { currentLanguage, LANGUAGES, makeT, setLanguage } from "./i18n";
+import SendPanel from "./device/SendPanel";
 
 type Tab = "prepare" | "preview" | "device";
 
@@ -387,13 +388,11 @@ export default function App() {
 
         {tab === "device" ? (
           <div className="device-pane">
-            <div className="device-card">
-              <span className="section-title">{t("tab_device")}</span>
-              <div className="card">
-                <span className="note">{t("device_hint")}</span>
-                <span className="note">{t("bambu_note")}</span>
-              </div>
-            </div>
+            <SendPanel
+              gcode={slice?.gcode ?? null}
+              gcodeName={(fileName?.replace(/\.[^.]+$/, "") ?? "minislicer") + ".gcode"}
+              t={t}
+            />
           </div>
         ) : (
           <div className="viewer-wrap">
