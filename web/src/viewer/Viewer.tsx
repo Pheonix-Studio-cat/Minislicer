@@ -2,23 +2,23 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
-// Bambu Lab X1C als Standard-Druckbett, bis die Profil-Auswahl (Phase 2) kommt
-const BED_X = 256;
-const BED_Y = 256;
+interface Props {
+  bedX: number;
+  bedY: number;
+  geometry: THREE.BufferGeometry | null;
+}
 
-export interface ViewerHandle {
+interface SceneHandle {
   setModel(geometry: THREE.BufferGeometry): void;
 }
 
-interface Props {
-  onReady(handle: ViewerHandle): void;
-}
-
-export default function Viewer({ onReady }: Props) {
+export default function Viewer({ bedX, bedY, geometry }: Props) {
   const mountRef = useRef<HTMLDivElement>(null);
-  const onReadyRef = useRef(onReady);
-  onReadyRef.current = onReady;
+  const handleRef = useRef<SceneHandle | null>(null);
+  const geometryRef = useRef(geometry);
+  geometryRef.current = geometry;
 
+  // Szene aufbauen — wird bei Druckerwechsel (Bettgrösse) neu erstellt
   useEffect(() => {
     const mount = mountRef.current!;
     const scene = new THREE.Scene();
@@ -26,7 +26,8 @@ export default function Viewer({ onReady }: Props) {
 
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 4000);
     camera.up.set(0, 0, 1); // Z nach oben, wie in Slicern üblich
-    camera.position.set(220, -220, 180);
+    const startDist = Math.max(bedX, bedY) * 1.1;
+    camera.position.set(startDist, -startDist, startDist * 0.8);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -46,16 +47,17 @@ export default function Viewer({ onReady }: Props) {
 
     // Druckbett: Platte + Raster + Umrandung
     const bed = new THREE.Mesh(
-      new THREE.PlaneGeometry(BED_X, BED_Y),
+      new THREE.PlaneGeometry(bedX, bedY),
       new THREE.MeshStandardMaterial({ color: 0x171a21, roughness: 0.9 })
     );
     scene.add(bed);
-    const grid = new THREE.GridHelper(BED_X, BED_X / 16, 0x2e3542, 0x232833);
+    const grid = new THREE.GridHelper(Math.max(bedX, bedY), Math.round(Math.max(bedX, bedY) / 16), 0x2e3542, 0x232833);
     grid.rotation.x = Math.PI / 2;
+    grid.scale.set(bedX / Math.max(bedX, bedY), 1, bedY / Math.max(bedX, bedY));
     grid.position.z = 0.05;
     scene.add(grid);
     const outline = new THREE.LineSegments(
-      new THREE.EdgesGeometry(new THREE.PlaneGeometry(BED_X, BED_Y)),
+      new THREE.EdgesGeometry(new THREE.PlaneGeometry(bedX, bedY)),
       new THREE.LineBasicMaterial({ color: 0x35c56f })
     );
     outline.position.z = 0.1;
@@ -68,30 +70,30 @@ export default function Viewer({ onReady }: Props) {
       metalness: 0.05,
     });
 
-    const handle: ViewerHandle = {
-      setModel(geometry) {
-        if (model) {
-          scene.remove(model);
-          model.geometry.dispose();
-        }
+    handleRef.current = {
+      setModel(g) {
+        if (model) scene.remove(model);
         // Modell zentrieren und aufs Bett setzen
-        geometry.computeBoundingBox();
-        const bb = geometry.boundingBox!;
+        g.computeBoundingBox();
+        const bb = g.boundingBox!;
         const center = new THREE.Vector3();
         bb.getCenter(center);
-        geometry.translate(-center.x, -center.y, -bb.min.z);
-        geometry.computeVertexNormals();
+        g.translate(-center.x, -center.y, -bb.min.z);
+        g.computeVertexNormals();
 
-        model = new THREE.Mesh(geometry, material);
+        model = new THREE.Mesh(g, material);
         scene.add(model);
 
         const size = new THREE.Vector3();
         bb.getSize(size);
-        const dist = Math.max(size.x, size.y, size.z, 60) * 2.2;
+        const dist = Math.max(size.x, size.y, size.z, bedX * 0.3) * 2.2;
         camera.position.set(dist, -dist, dist * 0.8);
         controls.target.set(0, 0, size.z / 2);
       },
     };
+
+    // Bereits geladenes Modell nach Druckerwechsel wieder anzeigen
+    if (geometryRef.current) handleRef.current.setModel(geometryRef.current);
 
     const resize = () => {
       const { clientWidth: w, clientHeight: h } = mount;
@@ -111,16 +113,20 @@ export default function Viewer({ onReady }: Props) {
     };
     loop();
 
-    onReadyRef.current(handle);
-
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
       controls.dispose();
       renderer.dispose();
+      handleRef.current = null;
       mount.removeChild(renderer.domElement);
     };
-  }, []);
+  }, [bedX, bedY]);
+
+  // Neues Modell in die bestehende Szene laden
+  useEffect(() => {
+    if (geometry) handleRef.current?.setModel(geometry);
+  }, [geometry]);
 
   return <div ref={mountRef} style={{ position: "absolute", inset: 0 }} />;
 }

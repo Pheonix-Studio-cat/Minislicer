@@ -129,6 +129,21 @@ body {
   color: var(--accent);
 }
 
+.warn {
+  font-size: 0.8rem;
+  color: #f2a13c;
+}
+
+select {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  width: 100%;
+}
+
 button.primary,
 label.primary {
   background: var(--accent);
