@@ -283,6 +283,10 @@ input[type="file"] {
   display: flex;
   gap: 8px;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: calc(100% - 32px);
+  z-index: 10;
 }
 
 .slice-action button.secondary {
@@ -377,5 +381,44 @@ input[type="file"] {
 
   .topbar .engine-tag {
     display: none;
+  }
+
+  /* Topbar kompakt: nur Logo statt Schriftzug, damit "Modell öffnen" sichtbar bleibt */
+  .topbar {
+    gap: 6px;
+    padding: 0 8px;
+  }
+
+  .brand {
+    font-size: 0;
+    gap: 0;
+  }
+
+  .topbar select.lang {
+    max-width: 64px;
+  }
+
+  .tab {
+    padding: 0 8px;
+    font-size: 12.5px;
+  }
+
+  /* Slice-Leiste auf Handys unten quer, gross genug für Touch */
+  .slice-action {
+    top: auto;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    max-width: none;
+  }
+
+  .slice-action button {
+    flex: 1;
+    min-height: 44px;
+  }
+
+  .layer-slider {
+    top: 8%;
+    height: 55%;
   }
 }

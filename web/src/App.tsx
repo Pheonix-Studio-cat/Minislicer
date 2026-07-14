@@ -224,12 +224,14 @@ export default function App() {
         </select>
         <label className="open-btn">
           {t("open_model")}
+          {/* Kein accept-Filter: iOS/Android blenden sonst STL/OBJ/3MF im
+              Datei-Dialog aus (unbekannte Endungen) — Prüfung erfolgt in JS */}
           <input
             type="file"
-            accept=".stl,.obj,.3mf"
             onChange={(e) => {
               const file = e.target.files?.[0];
-              if (file) void openFile(file);
+              if (file && isSupportedFile(file.name)) void openFile(file);
+              else if (file) setError(`${file.name} — ${t("drop_hint")}`);
               e.target.value = "";
             }}
           />
