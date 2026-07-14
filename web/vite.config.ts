@@ -10,6 +10,8 @@ const crossOriginIsolation = {
 
 export default defineConfig({
   plugins: [react()],
+  // Für GitHub Pages: BASE_PATH=/Minislicer/ (siehe .github/workflows/deploy.yml)
+  base: process.env.BASE_PATH ?? "/",
   server: { headers: crossOriginIsolation },
   preview: { headers: crossOriginIsolation },
 });
