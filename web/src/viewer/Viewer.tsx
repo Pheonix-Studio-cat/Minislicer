@@ -70,14 +70,14 @@ export default function Viewer({ bedX, bedY, geometry, previewLayers, previewLim
     scene.add(grid);
     const outline = new THREE.LineSegments(
       new THREE.EdgesGeometry(new THREE.PlaneGeometry(bedX, bedY)),
-      new THREE.LineBasicMaterial({ color: 0x00ae42 })
+      new THREE.LineBasicMaterial({ color: 0xee5622 })
     );
     outline.position.z = 0.1;
     scene.add(outline);
 
     let model: THREE.Mesh | null = null;
     const material = new THREE.MeshStandardMaterial({
-      color: 0x00ae42,
+      color: 0xee5622,
       roughness: 0.55,
       metalness: 0.05,
     });
@@ -140,7 +140,7 @@ export default function Viewer({ bedX, bedY, geometry, previewLayers, previewLim
           g.setAttribute("position", new THREE.BufferAttribute(all, 3));
           lines = new THREE.LineSegments(
             g,
-            new THREE.LineBasicMaterial({ color: 0x00ae42 })
+            new THREE.LineBasicMaterial({ color: 0xee5622 })
           );
           scene.add(lines);
         }

@@ -45,5 +45,8 @@
   "language": "Dil",
   "engine_fallback": "JS yedeği (motor derlenmedi)",
   "walls": "Duvarlar",
-  "infill": "Dolgu"
+  "infill": "Dolgu",
+  "send": "Gönder",
+  "quality": "Kalite",
+  "strength": "Dayanıklılık"
 }

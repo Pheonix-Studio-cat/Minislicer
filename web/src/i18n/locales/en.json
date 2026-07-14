@@ -45,5 +45,8 @@
   "language": "Language",
   "engine_fallback": "JS fallback (engine not built)",
   "walls": "Wall loops",
-  "infill": "Sparse infill"
+  "infill": "Sparse infill",
+  "send": "Send",
+  "quality": "Quality",
+  "strength": "Strength"
 }

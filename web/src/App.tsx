@@ -307,6 +307,7 @@ export default function App() {
 
           <span className="section-title">{t("process")}</span>
           <div className="card">
+            <span className="cat">{t("quality")}</span>
             <div className="row">
               <span className="label">{t("layer_height")}</span>
               <select
@@ -320,6 +321,7 @@ export default function App() {
                 ))}
               </select>
             </div>
+            <span className="cat">{t("strength")}</span>
             <div className="row">
               <span className="label">{t("walls")}</span>
               <input
@@ -340,6 +342,7 @@ export default function App() {
                 onChange={(e) => setInfill(Number(e.target.value))}
               />
             </div>
+            <span className="cat">{t("speed")}</span>
             <div className="row">
               <span className="label">{t("speed")}</span>
               <input
@@ -408,6 +411,9 @@ export default function App() {
                 <button className="secondary" onClick={exportGcode}>
                   {t("export_gcode")}
                 </button>
+                <button className="secondary" onClick={() => setTab("device")}>
+                  {t("send")}
+                </button>
               </div>
             </>
           )}
@@ -445,6 +451,16 @@ export default function App() {
               >
                 {slicing ? t("slicing") : t("slice_plate")}
               </button>
+              {slice && (
+                <>
+                  <button className="secondary" onClick={exportGcode}>
+                    {t("export_gcode")}
+                  </button>
+                  <button className="secondary" onClick={() => setTab("device")}>
+                    {t("send")}
+                  </button>
+                </>
+              )}
             </div>
             {showPreview && previewLayers.length > 0 && (
               <div className="layer-slider">

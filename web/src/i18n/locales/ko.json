@@ -45,5 +45,8 @@
   "language": "언어",
   "engine_fallback": "JS 폴백 (엔진 미빌드)",
   "walls": "벽 수",
-  "infill": "내부 채움"
+  "infill": "내부 채움",
+  "send": "전송",
+  "quality": "품질",
+  "strength": "강도"
 }

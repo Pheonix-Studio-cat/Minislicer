@@ -45,5 +45,8 @@
   "language": "Taal",
   "engine_fallback": "JS-fallback (engine niet gebouwd)",
   "walls": "Wanden",
-  "infill": "Vulling"
+  "infill": "Vulling",
+  "send": "Versturen",
+  "quality": "Kwaliteit",
+  "strength": "Sterkte"
 }

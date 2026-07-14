@@ -45,5 +45,8 @@
   "language": "Jazyk",
   "engine_fallback": "Záložní JS (engine nesestaven)",
   "walls": "Stěny",
-  "infill": "Výplň"
+  "infill": "Výplň",
+  "send": "Odeslat",
+  "quality": "Kvalita",
+  "strength": "Pevnost"
 }

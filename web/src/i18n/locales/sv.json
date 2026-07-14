@@ -45,5 +45,8 @@
   "language": "Språk",
   "engine_fallback": "JS-reserv (motorn ej byggd)",
   "walls": "Väggar",
-  "infill": "Fyllnad"
+  "infill": "Fyllnad",
+  "send": "Skicka",
+  "quality": "Kvalitet",
+  "strength": "Hållfasthet"
 }
