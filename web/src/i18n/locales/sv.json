@@ -43,5 +43,7 @@
   "no_gcode": "Slica plattan först.",
   "bambu_note": "Bambu Lab-skrivare (LAN-läge) kräver en lokal brygga — planerad för enhetsfasen. OctoPrint och Klipper/Moonraker fungerar direkt.",
   "language": "Språk",
-  "engine_fallback": "JS-reserv (motorn ej byggd)"
+  "engine_fallback": "JS-reserv (motorn ej byggd)",
+  "walls": "Väggar",
+  "infill": "Fyllnad"
 }

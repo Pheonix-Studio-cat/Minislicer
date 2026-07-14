@@ -43,5 +43,7 @@
   "no_gcode": "Nejprve slicujte podložku.",
   "bambu_note": "Tiskárny Bambu Lab (režim LAN) vyžadují lokální bridge — plánováno pro fázi zařízení. OctoPrint a Klipper/Moonraker fungují přímo.",
   "language": "Jazyk",
-  "engine_fallback": "Záložní JS (engine nesestaven)"
+  "engine_fallback": "Záložní JS (engine nesestaven)",
+  "walls": "Stěny",
+  "infill": "Výplň"
 }

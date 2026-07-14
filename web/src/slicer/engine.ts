@@ -25,7 +25,11 @@ interface EngineModule {
     lineWidth: number,
     speed: number,
     nozzleTemp: number,
-    bedTemp: number
+    bedTemp: number,
+    walls: number,
+    infillDensity: number,
+    startGcode: string,
+    endGcode: string
   ): string;
   version(): string;
 }
@@ -36,6 +40,13 @@ export interface SliceSettings {
   speed: number;
   nozzleTemp: number;
   bedTemp: number;
+  /** Anzahl Wände (BambuStudio-Default: 2) */
+  walls: number;
+  /** Fülldichte 0..1 (BambuStudio-Default: 0.15) */
+  infillDensity: number;
+  /** Original-Start-/End-G-Code aus dem BambuStudio-Maschinenprofil */
+  startGcode: string;
+  endGcode: string;
 }
 
 export interface SliceResult {
@@ -80,7 +91,11 @@ export async function sliceModel(
     s.lineWidth,
     s.speed,
     s.nozzleTemp,
-    s.bedTemp
+    s.bedTemp,
+    s.walls,
+    s.infillDensity,
+    s.startGcode,
+    s.endGcode
   );
   const num = (key: string) =>
     parseFloat(gcode.match(new RegExp(`; ${key} = ([\\d.]+)`))?.[1] ?? "0");

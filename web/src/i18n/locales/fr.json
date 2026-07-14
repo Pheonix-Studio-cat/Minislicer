@@ -43,5 +43,7 @@
   "no_gcode": "Découpez d'abord le plateau.",
   "bambu_note": "Les imprimantes Bambu Lab (mode LAN) nécessitent un pont local — prévu pour la phase appareil. OctoPrint et Klipper/Moonraker fonctionnent directement.",
   "language": "Langue",
-  "engine_fallback": "Secours JS (moteur non compilé)"
+  "engine_fallback": "Secours JS (moteur non compilé)",
+  "walls": "Parois",
+  "infill": "Remplissage"
 }

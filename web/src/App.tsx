@@ -10,6 +10,7 @@ import {
 } from "./slicer/engine";
 import { isSupportedFile, loadModel } from "./slicer/loadModel";
 import { GcodeLayer, parseGcodeLayers } from "./slicer/gcodePreview";
+import { loadMachineGcode } from "./slicer/machineGcode";
 import {
   loadPrinters,
   Printer,
@@ -49,6 +50,8 @@ export default function App() {
   const [bedTemp, setBedTemp] = useState(FILAMENTS.PLA.bed);
   const [layerHeight, setLayerHeight] = useState(0.2);
   const [speed, setSpeed] = useState(60);
+  const [walls, setWalls] = useState(2); // BambuStudio-Default
+  const [infill, setInfill] = useState(15); // % , BambuStudio-Default
 
   const [slicing, setSlicing] = useState(false);
   const [slice, setSlice] = useState<SliceResult | null>(null);
@@ -132,12 +135,17 @@ export default function App() {
       // kurz rendern lassen, damit der „Slicing …“-Zustand sichtbar wird
       await new Promise((r) => setTimeout(r, 30));
       const positions = geometry.getAttribute("position").array as Float32Array;
+      const machine = await loadMachineGcode(printerName, nozzleTemp, bedTemp);
       const result = await sliceModel(positions, {
         layerHeight,
         lineWidth: (printer?.nozzle ?? 0.4) * 1.05,
         speed,
         nozzleTemp,
         bedTemp,
+        walls,
+        infillDensity: infill / 100,
+        startGcode: machine.start,
+        endGcode: machine.end,
       });
       const layers = parseGcodeLayers(result.gcode);
       setSlice(result);
@@ -149,7 +157,7 @@ export default function App() {
     } finally {
       setSlicing(false);
     }
-  }, [geometry, layerHeight, speed, nozzleTemp, bedTemp, printer]);
+  }, [geometry, layerHeight, speed, nozzleTemp, bedTemp, walls, infill, printer, printerName]);
 
   const exportGcode = useCallback(() => {
     if (!slice) return;
@@ -313,6 +321,26 @@ export default function App() {
               </select>
             </div>
             <div className="row">
+              <span className="label">{t("walls")}</span>
+              <input
+                type="number"
+                value={walls}
+                min={1}
+                max={8}
+                onChange={(e) => setWalls(Number(e.target.value))}
+              />
+            </div>
+            <div className="row">
+              <span className="label">{t("infill")}</span>
+              <input
+                type="number"
+                value={infill}
+                min={0}
+                max={100}
+                onChange={(e) => setInfill(Number(e.target.value))}
+              />
+            </div>
+            <div className="row">
               <span className="label">{t("speed")}</span>
               <input
                 type="number"
@@ -322,7 +350,6 @@ export default function App() {
                 onChange={(e) => setSpeed(Number(e.target.value))}
               />
             </div>
-            <span className="note">{t("sliced_note")}</span>
           </div>
 
           <span className="section-title">{t("model")}</span>
