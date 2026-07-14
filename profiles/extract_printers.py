@@ -87,6 +87,20 @@ def main() -> int:
                 "nozzle": float(nozzle[0]) if nozzle else None,
             })
 
+            # Original-Start-/End-G-Code des Druckers als eigene Datei
+            start = resolve(machines, name, "machine_start_gcode") or ""
+            end = resolve(machines, name, "machine_end_gcode") or ""
+            if isinstance(start, list):
+                start = "\n".join(start)
+            if isinstance(end, list):
+                end = "\n".join(end)
+            mdir = OUT.parent / "machines"
+            mdir.mkdir(parents=True, exist_ok=True)
+            (mdir / f"{name}.json").write_text(
+                json.dumps({"start_gcode": start, "end_gcode": end},
+                           ensure_ascii=False),
+                encoding="utf-8")
+
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(printers, ensure_ascii=False, separators=(",", ":")),
                    encoding="utf-8")

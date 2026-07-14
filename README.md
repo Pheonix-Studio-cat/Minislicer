@@ -41,8 +41,10 @@ cd engine/wasm
 - **UI im Bambu-Studio-Stil**: Tabs Vorbereiten/Vorschau/Gerät, Panels für Drucker/Filament/Prozess
 - **Import**: STL, OBJ und 3MF
 - **Drucker**: 202 Modelle von 12 Herstellern aus den originalen BambuStudio-Profilen (inkl. H2C/H2D/X2D/P2S)
-- **Slicing**: Kontur-Slicer in C++ (WASM) mit G-Code-Export und Schicht-Vorschau
-  — bewusst vereinfacht (nur Aussenwände); der volle libslic3r-Kern folgt in Phase 1
+- **Slicing**: C++-Kern (WASM) auf Basis der BambuStudio-Geometrie-Bibliothek
+  (Clipper aus `src/clipper`): mehrere Wände, Rectilinear-Füllung (45°/135°,
+  volle Deck-/Bodenschichten), originale Start-/End-G-Codes aus den
+  BambuStudio-Maschinenprofilen; der volle libslic3r-Port folgt in Phase 1
 - **Senden**: G-Code-Upload an OctoPrint und Klipper/Moonraker
 - **Sprachen**: alle 18 Sprachen aus BambuStudio
 

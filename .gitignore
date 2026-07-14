@@ -9,6 +9,9 @@ engine/wasm/build/
 # emsdk-Installation (lokal, nicht einchecken)
 engine/emsdk/
 
+# Eigen-Header (lädt engine/wasm/build.sh bei Bedarf)
+engine/wasm/vendor/eigen/
+
 # Heruntergeladene BambuStudio-Profile (per profiles/sync_profiles.sh holen)
 profiles/BambuStudio/
 web/tsconfig.tsbuildinfo

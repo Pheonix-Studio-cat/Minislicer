@@ -18,7 +18,7 @@
 
 namespace {
 
-constexpr const char* kVersion = "0.2.0";
+constexpr const char* kVersion = "0.3.0-bbl-clipper";
 
 // positions: flaches Float32Array [x,y,z, x,y,z, ...], drei Vertices je Dreieck, in mm.
 std::string analyzeMesh(emscripten::val positions) {
@@ -72,7 +72,8 @@ std::string version() { return kVersion; }
 // Sliced die Dreiecks-Suppe und liefert G-Code (siehe slicer.h).
 std::string sliceMesh(emscripten::val positions, double layerHeight,
                       double lineWidth, double speed, double nozzleTemp,
-                      double bedTemp) {
+                      double bedTemp, int walls, double infillDensity,
+                      std::string startGcode, std::string endGcode) {
     const std::vector<float> verts =
         emscripten::convertJSArrayToNumberVector<float>(positions);
     minislicer::SliceParams p;
@@ -81,6 +82,10 @@ std::string sliceMesh(emscripten::val positions, double layerHeight,
     p.speed = speed;
     p.nozzle_temp = nozzleTemp;
     p.bed_temp = bedTemp;
+    p.walls = walls;
+    p.infill_density = infillDensity;
+    p.start_gcode = std::move(startGcode);
+    p.end_gcode = std::move(endGcode);
     return minislicer::sliceToGcode(verts, p);
 }
 

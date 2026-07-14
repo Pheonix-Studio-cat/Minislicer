@@ -1,0 +1,1 @@
+{"start_gcode": "M140 S0\nM104 S0 \nSTART_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single]", "end_gcode": "END_PRINT"}

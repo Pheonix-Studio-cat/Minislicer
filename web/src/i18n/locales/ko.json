@@ -43,5 +43,7 @@
   "no_gcode": "먼저 플레이트를 슬라이스하세요.",
   "bambu_note": "Bambu Lab 프린터(LAN 모드)는 로컬 브리지가 필요합니다 — 장치 단계에서 지원 예정. OctoPrint와 Klipper/Moonraker는 바로 작동합니다.",
   "language": "언어",
-  "engine_fallback": "JS 폴백 (엔진 미빌드)"
+  "engine_fallback": "JS 폴백 (엔진 미빌드)",
+  "walls": "벽 수",
+  "infill": "내부 채움"
 }

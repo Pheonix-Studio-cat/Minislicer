@@ -7,7 +7,16 @@ cd "$(dirname "$0")"
 OUT_DIR="../../web/public/engine"
 mkdir -p build "$OUT_DIR"
 
-emcc bindings.cpp \
+# Eigen (header-only) wird von BambuStudios Clipper gebraucht — bei Bedarf holen
+if [ ! -d vendor/eigen/Eigen ]; then
+  echo "Lade Eigen 3.4.0 …"
+  mkdir -p vendor/eigen
+  curl -sL https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz |
+    tar xz -C vendor/eigen --strip-components=1 eigen-3.4.0/Eigen
+fi
+
+emcc bindings.cpp vendor/clipper/clipper.cpp \
+  -I. -Ivendor -Ivendor/eigen \
   -O3 \
   --bind \
   -s MODULARIZE=1 \
