@@ -45,5 +45,8 @@
   "language": "Lingua",
   "engine_fallback": "Fallback JS (motore non compilato)",
   "walls": "Pareti",
-  "infill": "Riempimento"
+  "infill": "Riempimento",
+  "send": "Invia",
+  "quality": "Qualità",
+  "strength": "Resistenza"
 }

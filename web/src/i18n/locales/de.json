@@ -45,5 +45,8 @@
   "language": "Sprache",
   "engine_fallback": "JS-Fallback (Engine nicht gebaut)",
   "walls": "Wände",
-  "infill": "Füllung"
+  "infill": "Füllung",
+  "send": "Senden",
+  "quality": "Qualität",
+  "strength": "Festigkeit"
 }

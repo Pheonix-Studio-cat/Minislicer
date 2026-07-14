@@ -45,5 +45,8 @@
   "language": "Język",
   "engine_fallback": "Awaryjny JS (silnik niezbudowany)",
   "walls": "Ściany",
-  "infill": "Wypełnienie"
+  "infill": "Wypełnienie",
+  "send": "Wyślij",
+  "quality": "Jakość",
+  "strength": "Wytrzymałość"
 }

@@ -45,5 +45,8 @@
   "language": "Idioma",
   "engine_fallback": "Respaldo JS (motor no compilado)",
   "walls": "Paredes",
-  "infill": "Relleno"
+  "infill": "Relleno",
+  "send": "Enviar",
+  "quality": "Calidad",
+  "strength": "Resistencia"
 }

@@ -45,5 +45,8 @@
   "language": "语言",
   "engine_fallback": "JS 备用（引擎未构建）",
   "walls": "墙层数",
-  "infill": "稀疏填充"
+  "infill": "稀疏填充",
+  "send": "发送",
+  "quality": "质量",
+  "strength": "强度"
 }

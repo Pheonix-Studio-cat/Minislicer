@@ -45,5 +45,8 @@
   "language": "Langue",
   "engine_fallback": "Secours JS (moteur non compilé)",
   "walls": "Parois",
-  "infill": "Remplissage"
+  "infill": "Remplissage",
+  "send": "Envoyer",
+  "quality": "Qualité",
+  "strength": "Résistance"
 }

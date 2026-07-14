@@ -45,5 +45,8 @@
   "language": "Nyelv",
   "engine_fallback": "JS tartalék (a motor nincs lefordítva)",
   "walls": "Falak",
-  "infill": "Kitöltés"
+  "infill": "Kitöltés",
+  "send": "Küldés",
+  "quality": "Minőség",
+  "strength": "Szilárdság"
 }

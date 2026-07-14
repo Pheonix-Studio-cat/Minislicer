@@ -4,18 +4,18 @@
   box-sizing: border-box;
 }
 
-/* Farbwelt an Bambu Studio angelehnt: dunkle Titelleiste, helle Panels,
-   Bambu-Grün als Akzent */
+/* Layout wie Bambu Studio, aber in eigenen Farben: Phönix-Orange als Akzent */
 :root {
-  --topbar: #262a30;
+  --topbar: #23262b;
   --topbar-text: #c9ced6;
   --panel: #ffffff;
   --panel-2: #f4f5f7;
   --border: #dfe2e7;
   --text: #30343b;
   --muted: #7d8590;
-  --accent: #00ae42;
-  --accent-dark: #009539;
+  --accent: #ee5622;
+  --accent-dark: #d2431a;
+  --accent-soft: rgba(238, 86, 34, 0.35);
   --warn: #d9822b;
 }
 
@@ -179,7 +179,7 @@ input[type="password"] {
 
 select:focus,
 input:focus {
-  outline: 2px solid rgba(0, 174, 66, 0.35);
+  outline: 2px solid var(--accent-soft);
 }
 
 .badge {
@@ -214,7 +214,7 @@ button.primary:hover {
 }
 
 button.primary:disabled {
-  background: #9fb3a7;
+  background: #c7b3aa;
   cursor: not-allowed;
 }
 
@@ -279,10 +279,30 @@ input[type="file"] {
 .slice-action {
   position: absolute;
   right: 16px;
-  bottom: 16px;
+  top: 12px;
   display: flex;
   gap: 8px;
   align-items: center;
+}
+
+.slice-action button.secondary {
+  background: var(--topbar);
+  color: #fff;
+  border-color: transparent;
+}
+
+.slice-action button.secondary:hover {
+  color: #fff;
+  filter: brightness(1.2);
+}
+
+.cat {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-dark);
+  margin-top: 2px;
 }
 
 /* Vertikaler Schicht-Slider rechts, wie in Bambu Studio */

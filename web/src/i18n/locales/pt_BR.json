@@ -45,5 +45,8 @@
   "language": "Idioma",
   "engine_fallback": "Reserva JS (motor não compilado)",
   "walls": "Paredes",
-  "infill": "Preenchimento"
+  "infill": "Preenchimento",
+  "send": "Enviar",
+  "quality": "Qualidade",
+  "strength": "Resistência"
 }
